@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matix Estate – Property Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background:#f7f7f7; margin:0; color:#111; }
+    header { background:#fff; border-bottom:1px solid #eee; padding:12px 24px; display:flex; justify-content:space-between; align-items:center; }
+    .brand { display:flex; align-items:center; gap:8px; }
+    .brand img { width:40px; height:40px; border-radius:50%; object-fit:cover; }
+    main { max-width:1100px; margin:40px auto; background:#fff; padding:20px; border-radius:18px; box-shadow:0 18px 40px rgba(0,0,0,0.06); }
+    .gallery { display:grid; gap:10px; }
+    .gallery img { width:100%; border-radius:12px; }
+    .thumbs { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+    .thumbs img { cursor:pointer; border-radius:8px; border:1px solid transparent; }
+    .thumbs img.active { border-color:#c7a16a; }
+    form { margin-top:20px; display:grid; gap:10px; }
+    input, select, textarea { width:100%; padding:10px; border-radius:10px; border:1px solid #ddd; }
+    button { background:#c7a16a; color:#fff; border:none; padding:12px; border-radius:999px; font-weight:600; cursor:pointer; }
+    footer { text-align:center; padding:20px; color:#666; font-size:14px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img src="matix-estate-logo.png" alt="Matix Estate Logo" />
+    <div>
+      <strong>Matix Estate</strong><br>
+      <small>Luxury Property & Investment</small>
+    </div>
+  </div>
+  <nav><a href="#">Properties</a> | <a href="#inquiry">Contact</a></nav>
+</header>
+<main>
+  <h1>Cliffside Residence – Amalfi Coast</h1>
+  <p><em>Amalfi Coast • Italy</em></p>
+  <div class="gallery">
+    <img id="main-img" src="images/property-main.jpg" alt="Main property image">
+    <div class="thumbs">
+      <img src="images/property-main.jpg" class="active" data-large="images/property-main.jpg">
+      <img src="images/property-2.jpg" data-large="images/property-2.jpg">
+      <img src="images/property-3.jpg" data-large="images/property-3.jpg">
+      <img src="images/property-4.jpg" data-large="images/property-4.jpg">
+    </div>
+  </div>
+  <p>A Mediterranean retreat with panoramic sea views and refined finishes. Ideal for investment or personal residency.</p>
+  <section id="inquiry">
+    <h2>Request More Details</h2>
+    <form id="inq-form">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <select required>
+        <option value="" disabled selected>Purpose</option>
+        <option>Investment</option>
+        <option>Personal Residency</option>
+        <option>Summer Residency</option>
+      </select>
+      <select required>
+        <option value="" disabled selected>Investment Range</option>
+        <option>$0–$50,000</option>
+        <option>$50,000–$150,000</option>
+        <option>$150,000–$300,000</option>
+        <option>$300,000–$500,000</option>
+        <option>$500,000–$1,000,000</option>
+      </select>
+      <textarea placeholder="Notes (optional)"></textarea>
+      <button type="submit">Submit Inquiry</button>
+      <p id="success" style="display:none;color:green;">Thank you. We'll reach out shortly.</p>
+    </form>
+  </section>
+</main>
+<footer>© Matix Estate – Luxury Property & Investment Advisory</footer>
+<script>
+const thumbs=document.querySelectorAll('.thumbs img');
+const mainImg=document.getElementById('main-img');
+thumbs.forEach(t=>t.addEventListener('click',()=>{mainImg.src=t.dataset.large;thumbs.forEach(x=>x.classList.remove('active'));t.classList.add('active');}));
+document.getElementById('inq-form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('success').style.display='block';setTimeout(()=>document.getElementById('success').style.display='none',4000);e.target.reset();});
+</script>
+</body>
+</html>
